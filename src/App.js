@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Cells from "./components/Cells";
 
 function App() {
+  const [cells, setCells] = useState(["", "", "", "", "", "", "", "", ""]);
+  const [chance, setChance] = useState("o");
+  const [winningMessage, setWinningMessage] = useState(null);
+  const message = `The current chance is for ${chance}`;
+  console.log(cells);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="board">
+        {cells.map((cell, index) => (
+          <Cells
+            key={index}
+            id={index}
+            cell={cell}
+            setCells={setCells}
+            chance={chance}
+            setChance={setChance}
+          />
+        ))}
+        {message}
+      </div>
+
+      <p>This is the content</p>
     </div>
   );
 }
